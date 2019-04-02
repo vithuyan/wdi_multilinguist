@@ -1,8 +1,9 @@
 import requests
 import json
+import random 
 
 class Multilinguist:
-  """This class represents a world traveller who knows 
+  """This class represents a world traveller who knows
   what languages are spoken in each country around the world
   and can cobble together a sentence in most of them
   (but not very well)
@@ -15,7 +16,7 @@ class Multilinguist:
 
   def __init__(self):
     """Initializes the multilinguist's current_lang to 'en'
-    
+
     Returns
     -------
     Multilinguist
@@ -34,7 +35,7 @@ class Multilinguist:
 
     Returns
     -------
-    bool 
+    bool
         2 letter iso639_1 language code.
     """
     params = {'fullText': 'true'}
@@ -78,3 +79,25 @@ class Multilinguist:
     json_response = json.loads(response.text)
     return json_response['translationText']
 
+class MathGenius(Multilinguist):
+
+    def __init__(self):
+        pass
+
+    def report_total(self, list = []):
+        total_sum = sum(list)
+        return "total {}".format(total_sum)
+
+class QuoteCollector(Multilinguist):
+
+    def __init__(self, list_of_quotes):
+        self.list_of_quotes = []
+
+    def add_quote(self,quote):
+        self.list_of_quotes.append(quote)
+        return self.list_of_quotes
+
+    def random_quote(self):
+        random_num = random.randint(0, len(self.list_of_quotes) -1)
+        random_quote = self.list_of_quotes[random_num]
+        return random_quote
